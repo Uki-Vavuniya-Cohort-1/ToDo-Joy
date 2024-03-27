@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 //import models
 const Note = require("./Models/note");
 
-app.post("/todo", async (req, res) => {
+app.post("/note", async (req, res) => {
   const note = new Note({
     id: req.body.id,
     date: req.body.date,
