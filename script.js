@@ -1,42 +1,38 @@
-//Connect Mongoose
+// Import MongoDB
 const mongoose = require("mongoose");
 const URI =
-  "mongodb+srv://joy_james:j2002o3y12jr@cluster0.ydyhuwj.mongodb.net/Todo?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://jamesjoy2k24:j2002o3y12jr@cluster0.i0rspno.mongodb.net/To-Do?retryWrites=true&w=majority&appName=Cluster0";
 
-//Connect Mongodb using async function
+// Connect to MongoDB in async function
 const connectDB = async () => {
   try {
-    await mongoose.connect(URI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
-    console.log("MongoDB connected Successfully...");
-  } catch (err) {
-    console.log(err);
+    await mongoose.connect(URI);
+    console.log("MongoDB Successfully Connected");
+  } catch (error) {
+    console.log(error);
   }
 };
 connectDB();
 
-//Connect Express
+// Connect to Express
 const express = require("express");
 const app = express();
-app.use(express.json());
 const port = 3000;
+app.use(express.json());
 
+// App Listen
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello Joy's To-Do Lists!");
-});
+// Import Models
+const User = require("./Models/User.Model");
+const Note = require("./Models/Note.Model");
 
-//import models
-const Note = require("./Models/note");
-
-app.post("/note", async (req, res) => {
+// Create note
+app.post("/note/create", async (req, res) => {
   const note = new Note({
-    id: req.body.id,
+    note_id: req.body.note_id,
     date: req.body.date,
     title: req.body.title,
     creator: req.body.creator,
@@ -46,19 +42,45 @@ app.post("/note", async (req, res) => {
     deadline: req.body.deadline,
   });
   try {
-    await note.save();
-    res.send(note);
+    const savedNote = await note.save();
+    res.send(savedNote);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 });
 
-app.get("/note", async (req, res) => {
+// Get Note
+app.get("/note/get", async (req, res) => {
   try {
     const notes = await Note.find();
     res.send(notes);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 });
 
+// Update note creator name
+app.put("/note/update/:note_id", async (req, res) => {
+  try {
+    const updatedNote = await Note.findOneAndUpdate(
+      { note_id: req.params.note_id },
+      { creator: req.body.creator },
+      { new: true }
+    );
+    res.send(updatedNote);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete note using id
+app.delete("/note/delete/:note_id", async (req, res) => {
+  try {
+    const deletedNote = await Note.findOneAndDelete({
+      note_id: req.params.note_id,
+    });
+    res.send(deletedNote);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});

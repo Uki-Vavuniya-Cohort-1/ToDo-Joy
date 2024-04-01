@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const noteSchema = new mongoose.Schema({
-  id: {
-    type: String,
+  note_id: {
+    type: Number,
     required: true,
     unique: true,
   },
