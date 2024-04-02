@@ -84,3 +84,68 @@ app.delete("/note/delete/:note_id", async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+// Create User
+app.post("/user/create", async (req, res) => {
+  const user = new User({
+    user_id: req.body.user_id,
+    name: req.body.name,
+    role: req.body.role,
+    note: req.body.note,
+  });
+  try {
+    const savedUser = await user.save();
+    res.send(savedUser);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Get User
+app.get("/user/get", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.send(users);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Update user name
+app.put("/user/update/:user_id", async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { user_id: req.params.user_id },
+      { name: req.body.name },
+      { note: req.body.note },
+      { new: true }
+    );
+    res.send(updatedUser);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete user using id
+app.delete("/user/delete/:user_id", async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({
+      user_id: req.params.user_id,
+    });
+    res.send(deletedUser);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+
+// show user 1 notes's title only
+app.get("/user/1/notes", async (req, res) => {
+  try {
+    const user1Notes = await User.findOne({ user_id: 1 }).select("note");
+    const notesTitle = user1Notes.note.map((note) => note.title);
+    res.send(notesTitle);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
