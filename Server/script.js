@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const port = 3002;
+const port = 3000;
 const cors = require("cors");
 
 app.use(cors());
@@ -53,6 +53,14 @@ app.get("/note/get", async (req, res) => {
   try {
     const notes = await Note.find();
     res.send(notes);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+app.get("/note/get/:note_id", async (req, res) => {
+  try {
+    const note = await Note.findOne({ note_id: req.params.note_id });
+    res.send(note);
   } catch (error) {
     res.status(400).send(error);
   }
