@@ -1,0 +1,44 @@
+.color {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 5px 8px 15px 0 rgba(1, 255, 242, 0.2);
+  border-radius: 20px;
+}
+.color h1 {
+  color: aliceblue;
+}
+.color .box {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+.buttons .red:hover {
+  transition: 0.4s;
+  background-color: red;
+  color: black;
+}
+.buttons .blue:hover {
+  transition: 0.4s;
+  background-color: blue;
+  color: black;
+}
+.buttons .green:hover {
+  transition: 0.4s;
+  background-color: green;
+  color: black;
+}
+.color h2 {
+  cursor: pointer;
+  background-color: aqua;
+  border-radius: 10px;
+  padding: 5px;
+}

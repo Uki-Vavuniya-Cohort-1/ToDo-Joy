@@ -1,9 +1,14 @@
-// Import MongoDB
 const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
+const port = 3002;
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
+
 const URI =
   "mongodb+srv://jamesjoy2k24:j2002o3y12jr@cluster0.i0rspno.mongodb.net/To-Do?retryWrites=true&w=majority&appName=Cluster0";
-
-// Connect to MongoDB in async function
 const connectDB = async () => {
   try {
     await mongoose.connect(URI);
@@ -13,12 +18,6 @@ const connectDB = async () => {
   }
 };
 connectDB();
-
-// Connect to Express
-const express = require("express");
-const app = express();
-const port = 3000;
-app.use(express.json());
 
 // App Listen
 app.listen(port, () => {
@@ -133,18 +132,6 @@ app.delete("/user/delete/:user_id", async (req, res) => {
       user_id: req.params.user_id,
     });
     res.send(deletedUser);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
-
-// show user 1 notes's title only
-app.get("/user/1/notes", async (req, res) => {
-  try {
-    const user1Notes = await User.findOne({ user_id: 1 }).select("note");
-    const notesTitle = user1Notes.note.map((note) => note.title);
-    res.send(notesTitle);
   } catch (error) {
     res.status(400).send(error);
   }

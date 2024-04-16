@@ -34,7 +34,7 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
-//export note model
 module.exports = mongoose.model("Note", noteSchema);

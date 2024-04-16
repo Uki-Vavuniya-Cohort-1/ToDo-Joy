@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+  border-radius: 20px;
+  background: black;
+  box-shadow: 5px 8px 15px 0 rgba(146, 253, 248, 0.2);
+}
+.form .left {
+  color: white;
+  width: 400px;
+  text-align: center;
+}
+.form .left input {
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+  background: #ffffff;
+}
+.form .left textarea {
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 5px;
+  border: none;
+  background: #ffffff;
+}
+.form .right {
+  width: 400px;
+  text-align: center;
+}
+.form .right img {
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
+}

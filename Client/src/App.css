@@ -1,0 +1,23 @@
+* {
+  color: wheat;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid wheat;
+  width: 100%;
+  margin-top: 6rem;
+  border-radius: 10px;
+  background-color: black;
+}
+th,
+tr,
+td {
+  padding: 5px;
+  border: 1px solid wheat;
+  color: white;
+}
+
+tbody {
+  color: white;
+  background-color: black;
+}
